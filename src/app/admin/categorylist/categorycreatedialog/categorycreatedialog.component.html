@@ -1,0 +1,10 @@
+<h2 md-dialog-title>Type category name</h2>
+<div md-dialog-content>
+<md-input-container>
+  <input mdInput placeholder="Category" [(ngModel)]='categorytitle'>
+</md-input-container>
+</div>
+<div md-dialog-actions>
+  <button md-button (click)="dialogRef.close('cancel')" color="accent">Cancel</button>
+  <button md-button (click)="dialogRef.close('submit')" color="accent" [disabled]="categorytitle==''">Submit</button>
+</div>

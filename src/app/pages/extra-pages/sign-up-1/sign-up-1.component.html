@@ -1,0 +1,43 @@
+<card [title]="'Create your account'" [align]="'center'">
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <md-input-container>
+      <input mdInput placeholder="First name" [formControl]="form.controls['fname']">
+      <small *ngIf="form.controls['fname'].hasError('required') && form.controls['fname'].touched" class="form-message text-danger">You must include a first name.</small>
+      <small *ngIf="form.controls['fname'].hasError('minlength') && form.controls['fname'].touched" class="form-message text-danger">Your first name must be at least 5 characters long.</small>
+      <small *ngIf="form.controls['fname'].hasError('maxlength') && form.controls['fname'].touched" class="form-message text-danger">Your first name cannot exceed 10 characters.</small>
+    </md-input-container>
+
+    <md-input-container>
+      <input mdInput placeholder="Last name" [formControl]="form.controls['lname']">
+      <small *ngIf="form.controls['lname'].hasError('required') && form.controls['lname'].touched" class="form-message text-danger">You must include a last name.</small>
+      <small *ngIf="form.controls['lname'].hasError('minlength') && form.controls['lname'].touched" class="form-message text-danger">Your last name must be at least 5 characters long.</small>
+      <small *ngIf="form.controls['lname'].hasError('maxlength') && form.controls['lname'].touched" class="form-message text-danger">Your last name cannot exceed 10 characters.</small>
+
+    </md-input-container>
+
+    <md-input-container>
+      <input mdInput placeholder="Email address" [formControl]="form.controls['email']" type="email">
+      <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="form-message text-danger">You must include an email address.</small>
+      <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="form-message text-danger">You must include a valid email address.</small>
+    </md-input-container>
+
+    <md-input-container>
+      <input mdInput placeholder="Password" [formControl]="form.controls['password']" type="password">
+      <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="form-message text-danger">You must include password.</small>
+    </md-input-container>
+
+    <md-input-container>
+      <input mdInput placeholder="Confirm Password" [formControl]="form.controls['confirmPassword']" type="password">
+      <small *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched" class="form-message text-danger">You must include confirm password.</small>
+      <small *ngIf="form.controls['confirmPassword'].errors?.equalTo" class="form-message text-danger">Passwords do not math.</small>
+    </md-input-container>
+
+    <button md-raised-button color="primary" type="submit" [disabled]="!form.valid">Sign Up</button>
+
+    <div class="additional-info">
+      Already have an account?
+      <a href="#signInUp/sign-in">Sign in</a>
+    </div>
+  </form>
+</card>

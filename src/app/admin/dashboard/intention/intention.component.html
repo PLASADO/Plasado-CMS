@@ -1,0 +1,78 @@
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-6 col-xl-3">
+        <card [bgColor]="'danger'" class="info-card">
+          <div class="title text-uppercase">Intentions</div>
+          <div class="count">{{IntentionCount}}</div>
+          <!-- <badge [customColor]="'rgba(255,255,255,0.3)'" [borderRadius]="false">+17%</badge> <small>from previous period</small> -->
+          <md-icon>shopping_basket</md-icon>
+        </card>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+        <ngx-datatable
+          #datatable
+          class="material"
+          [rows]="intentionlist"
+          [headerHeight]="50"
+          [columnMode]="'standard'"
+          [rowHeight]="'auto'"
+          [limit]="10"
+          [loadingIndicator]="loadingIndicator"
+          [footerHeight]="50">
+      
+        <ngx-datatable-column name="No" >
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            <span>{{value}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="User">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+            <span>{{value}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Name">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+            <span>{{value}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="Date">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+            <span>{{value}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="Location">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+            <span>{{value}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="Category">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+            <span>{{value}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="MinBudget">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+            <span>{{value}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="MaxBudget">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+            <span>{{value}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            <button md-icon-button (click)="onEdit(row.no - 1)"><md-icon>edit</md-icon></button>
+            <button md-icon-button (click)="onRemove(row.no - 1)"><md-icon>delete</md-icon></button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

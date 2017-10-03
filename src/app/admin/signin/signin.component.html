@@ -1,0 +1,27 @@
+<card [title]="'Sign in your account'" [align]="'center'">
+  <div [hidden]="message == ''">
+      <alert [color]="messageClass" >{{message}}</alert>
+  </div>
+
+  <form [formGroup]="form" (submit)="onSignin()">
+
+
+    <md-input-container>
+      <input mdInput placeholder="Email address" [formControl]="form.controls['email']" type="email">
+      <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="form-message text-danger">You must include an email address.</small>
+      <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="form-message text-danger">You must include a valid email address.</small>
+    </md-input-container>
+
+    <md-input-container>
+      <input mdInput placeholder="Password" [formControl]="form.controls['password']" type="password">
+      <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="form-message text-danger">You must include password.</small>
+    </md-input-container>
+
+    <button type="button" type="button" md-raised-button color="primary" type="submit" [disabled]="!form.valid">Sign In</button>
+
+    <div class="additional-info">
+      Do you want to register?
+      <a href="#signin-up/sign-up">Sign up</a>
+    </div>
+  </form>
+</card>

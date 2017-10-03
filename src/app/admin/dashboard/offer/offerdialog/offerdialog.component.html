@@ -1,0 +1,55 @@
+<form [formGroup]="form">
+  <h2 md-dialog-title>{{dialogTitle}}</h2>
+  <div md-dialog-content >
+    <div class="row">
+      <div class="col-md-12">
+        <md-select placeholder="Select Category" [style.width]="'100%'" [formControl]="form.controls['category']">
+          <md-option *ngFor="let category of categoryList" [value]="category">
+            {{ category.$value}}
+          </md-option>
+        </md-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <md-input-container>
+          <input mdInput placeholder="Title" [formControl]="form.controls['title']">
+          <small *ngIf="form.controls['title'].hasError('required') && form.controls['title'].touched" class="form-message text-danger">You must include a tile.</small>
+          <small *ngIf="form.controls['title'].hasError('minlength') && form.controls['title'].touched" class="form-message text-danger">Your title must be at least 5 characters long.</small>
+          <small *ngIf="form.controls['title'].hasError('maxlength') && form.controls['title'].touched" class="form-message text-danger">Your title cannot exceed 30 characters.</small>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <md-input-container>
+          <input mdInput placeholder="Price" [formControl]="form.controls['price']">
+          <small *ngIf="form.controls['price'].hasError('required') && form.controls['price'].touched" class="form-message text-danger">You must include a price.</small>
+          <small *ngIf="form.controls['price'].hasError('minlength') && form.controls['price'].touched" class="form-message text-danger">Price must be at least 1.</small>
+          <small *ngIf="form.controls['price'].hasError('maxlength') && form.controls['price'].touched" class="form-message text-danger">Price cannot exceed 1000.</small>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <md-input-container>
+          <input mdInput placeholder="Discount" [formControl]="form.controls['discount']">
+          <small *ngIf="form.controls['discount'].hasError('required') && form.controls['discount'].touched" class="form-message text-danger">You must include a discount.</small>
+          <small *ngIf="form.controls['discount'].hasError('minlength') && form.controls['discount'].touched" class="form-message text-danger">Discount must be at least 0.</small>
+          <small *ngIf="form.controls['discount'].hasError('maxlength') && form.controls['discount'].touched" class="form-message text-danger">Price cannot exceed 100.</small>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <md-input-container class="mb-0">
+          <textarea mdInput placeholder="Comment" rows="5" [formControl]="form.controls['comment']"></textarea>
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+  <div md-dialog-actions>
+      <button md-button (click)="dialogRef.close('cancel')" color="accent">Cancel</button>
+      <button md-button (click)="dialogRef.close('submit')" color="accent" [disabled]="!form.valid">Submit</button>
+  </div>
+</form>

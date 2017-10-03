@@ -136,24 +136,30 @@ import { PageConfirmComponent }             from './pages/extra-pages/confirm/co
 import { Page404Component }                 from './pages/extra-pages/page-404/page-404.component';
 import { Page500Component }                 from './pages/extra-pages/page-500/page-500.component';
 
+
+
+import { SigninComponent } from './admin/signin/signin.component';
+import { SignupComponent } from './admin/signup/signup.component';
+import { OfferComponent } from './admin/dashboard/offer/offer.component';
+import { OfferdialogComponent } from './admin/dashboard/offer/offerdialog/offerdialog.component';
+
+import { AuthService } from './admin/services/auth-service/auth.service';
+import { FireService } from './admin/services/fireservice/fire.service';
+import { AuthGuard } from './admin/services/authguard/authguard';
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { IntentionComponent } from './admin/dashboard/intention/intention.component';
 
-import { AuthService } from './fireservice/auth.service';
-import { UserlistComponent } from './admin/userlist/userlist.component';
-import { OfferlistComponent } from './admin/offerlist/offerlist.component';
-import { OfferCreateDialogComponent } from './admin/offerlist/offer-create-dialog/offer-create-dialog.component';
-import { CategorylistComponent } from './admin/categorylist/categorylist.component';
-import { CategorycreatedialogComponent } from './admin/categorylist/categorycreatedialog/categorycreatedialog.component';
 export const firebaseConfig = {
-    apiKey: "AIzaSyBwdmdX7bfq1xjEsgk-6S2GeYqC2jXyt_Y",
-    authDomain: "plasado-eea28.firebaseapp.com",
-    databaseURL: "https://plasado-eea28.firebaseio.com",
-    projectId: "plasado-eea28",
-    storageBucket: "plasado-eea28.appspot.com",
-    messagingSenderId: "666738415613"
-  };
+  apiKey: "AIzaSyBwdmdX7bfq1xjEsgk-6S2GeYqC2jXyt_Y",
+  authDomain: "plasado-eea28.firebaseapp.com",
+  databaseURL: "https://plasado-eea28.firebaseio.com",
+  projectId: "plasado-eea28",
+  storageBucket: "plasado-eea28.appspot.com",
+  messagingSenderId: "666738415613"
+};
 @NgModule({
   imports: [
     BrowserModule,
@@ -199,7 +205,6 @@ export const firebaseConfig = {
       apiKey: 'AIzaSyAU9f7luK3J31nurL-Io3taRKF7w9BItQE'
     }),
     SqueezeBoxModule,
-
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule
@@ -290,17 +295,19 @@ export const firebaseConfig = {
     PageLeafletMapComponent,
     PageWidgetsComponent,
     PageLayoutsComponent,
-
-
-    UserlistComponent,
-    OfferlistComponent,
-    OfferCreateDialogComponent,
-    CategorylistComponent,
-    CategorycreatedialogComponent
+    SigninComponent,
+    SignupComponent,
+    OfferComponent,
+    OfferdialogComponent,
+    IntentionComponent
   ],
-  entryComponents: [ DialogResultComponent, CalendarDialogComponent,OfferCreateDialogComponent,CategorycreatedialogComponent ],
-  providers: [ AuthService ],
-  bootstrap: [ AppComponent ]
+  entryComponents: [ DialogResultComponent, CalendarDialogComponent, OfferdialogComponent ],
+  bootstrap: [ AppComponent ],
+  providers: [
+    AuthService,
+    FireService,
+    AuthGuard
+  ]
 })
 
 export class AppModule {

@@ -72,9 +72,14 @@ import { PageLeafletMapComponent }      from './pages/maps/leaflet-map/leaflet-m
 import { PageWidgetsComponent }         from './pages/widgets/widgets.component';
 import { PageLayoutsComponent }         from './pages/layouts/layouts.component';
 
-import { UserlistComponent } from './admin/userlist/userlist.component';
-import { OfferlistComponent } from './admin/offerlist/offerlist.component';
-import { CategorylistComponent } from './admin/categorylist/categorylist.component';
+import { SigninComponent } from './admin/signin/signin.component';
+import { SignupComponent } from './admin/signup/signup.component';
+import { OfferComponent } from './admin/dashboard/offer/offer.component';
+import { IntentionComponent } from './admin/dashboard/intention/intention.component';
+
+
+import { AuthGuard } from './admin/services/authguard/authguard';
+
 const defaultRoutes: Routes = [
   { path: 'dashboard', component: PageDashboardComponent },
   { path: 'dashboard-2', component: PageDashboard2Component },
@@ -144,7 +149,7 @@ const visiblesidebarRoutes: Routes = [
   { path: 'layouts', component: PageLayoutsComponent }
 ]
 
-const signInUp: Routes = [
+const extraRoutes: Routes = [
   { path: 'sign-in', component: PageSignIn1Component },
   { path: 'sign-in-social', component: PageSignIn3Component },
   { path: 'sign-up', component: PageSignUp1Component },
@@ -153,35 +158,41 @@ const signInUp: Routes = [
   { path: 'page-404', component: Page404Component },
   { path: 'page-500', component: Page500Component },
 ];
+const signin_up_Routes: Routes = [
+  { path: 'sign-in', component: SigninComponent },
+  { path: 'sign-up', component: SignupComponent }
+];
 const adminRoutes : Routes = [
-  { path : 'userlist', component : UserlistComponent},
-  { path : 'offerlist', component : OfferlistComponent },
-  { path : 'categorylist', component : CategorylistComponent }
+   { path : 'offerlist', component : OfferComponent, canActivate : [AuthGuard] },
+   { path : 'intentionlist', component : IntentionComponent, canActivate : [AuthGuard] },
+  // { path : 'devicemanage', component : DevicemanageComponent, canActivate : [AuthGuard] },
+  // { path : 'devicegroupmanage', component : DevicegroupmanageComponent, canActivate : [AuthGuard]},
+  // { path : 'devicegroupedit', component : DevicegroupeditComponent},
+  // { path : 'usermanage', component : UsermanageComponent } ,
+  // { path : 'usage', component : UsagemanageComponent}
 ];
 const routes: Routes = [
-  /*{
-    path: '',
-    redirectTo: '/default-layout/dashboard',
-    pathMatch: 'full'
-  },*/
   {
     path : '',
-    redirectTo : 'signInUp/sign-in',
+    redirectTo : 'signin-up/sign-in',
     pathMatch : 'full'
   },
   {
-    path: 'signInUp',
-    component: ExtraLayoutComponent,
-    children: signInUp
+  path: 'signin-up',
+  component: ExtraLayoutComponent,
+  children: signin_up_Routes
   },
   {
     path: 'admin',
     component : DefaultLayoutComponent,
     children : adminRoutes
   }
-
-
   /*{
+    path: '',
+    redirectTo: '/default-layout/dashboard',
+    pathMatch: 'full'
+  },
+  {
     path: 'default-layout',
     component: DefaultLayoutComponent,
     children: defaultRoutes
@@ -201,7 +212,11 @@ const routes: Routes = [
     component: BoxedshowLayoutComponent,
     children: boxedvisibleRoutes
   },
-
+  {
+    path: 'extra-layout',
+    component: ExtraLayoutComponent,
+    children: extraRoutes
+  },
   {
     path: '**',
     component: DefaultLayoutComponent,

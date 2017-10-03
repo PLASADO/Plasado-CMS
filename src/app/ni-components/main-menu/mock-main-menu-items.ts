@@ -2,6 +2,28 @@ import { MainMenuItem } from './main-menu-item';
 
 export const MAINMENUITEMS: MainMenuItem[] = [
   {
+    title: 'Offer Management',
+    icon: 'fa fa-columns',
+    active: false,
+    groupTitle : false,
+    sub: '',
+    routing: '/admin/offerlist',
+    externalLink: '',
+    budge: '',
+    budgeColor: ''
+  },
+  {
+    title: 'Intention Management',
+    icon: 'fa fa-columns',
+    active: false,
+    groupTitle : false,
+    sub: '',
+    routing: '/admin/intentionlist',
+    externalLink: '',
+    budge: '',
+    budgeColor: ''
+  }
+  /*{
     title: 'Main',
     icon: '',
     active: true,
@@ -13,39 +35,6 @@ export const MAINMENUITEMS: MainMenuItem[] = [
     budgeColor: ''
   },
   {
-    title: 'UserList',
-    icon: 'fa fa-th',
-    active: false,
-    groupTitle : false,
-    sub: '',
-    routing: '/admin/userlist',
-    externalLink: '',
-    budge: '',
-    budgeColor: ''
-  },
-  {
-    title: 'OfferList',
-    icon: 'fa fa-columns',
-    active: false,
-    groupTitle : false,
-    sub: '',
-    routing: '/admin/offerlist',
-    externalLink: '',
-    budge: '',
-    budgeColor: ''
-  },
-  {
-    title: 'CategoryList',
-    icon: 'fa fa-diamond',
-    active: false,
-    groupTitle: false,
-    sub: '',
-    routing: '/admin/categorylist',
-    externalLink: '',
-    budge: '',
-    budgeColor: ''
-  }
-  /*{
     title: 'Dashboards',
     icon: 'fa fa-home',
     active: false,

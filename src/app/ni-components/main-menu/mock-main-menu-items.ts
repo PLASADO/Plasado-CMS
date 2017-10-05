@@ -22,6 +22,17 @@ export const MAINMENUITEMS: MainMenuItem[] = [
     externalLink: '',
     budge: '',
     budgeColor: ''
+  },
+  {
+    title: 'Chat',
+    icon: 'fa fa-columns',
+    active: false,
+    groupTitle : false,
+    sub: '',
+    routing: '/admin/chat',
+    externalLink: '',
+    budge: '',
+    budgeColor: ''
   }
   /*{
     title: 'Main',

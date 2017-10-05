@@ -3,10 +3,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
-
 import { Router } from '@angular/router';
+
 import { User } from '../../model/user';
 import { Offer } from '../../model/offer';
+import { Intention } from '../../model/intention';
 
 import { AuthService } from '../auth-service/auth.service';
 @Injectable()
@@ -37,7 +38,10 @@ export class FireService {
     return this.db.list("categorylist");
   }
 
-
+  proposeOffertoIntention(intention : Intention, done){
+    // this.db.list("intentions/" + intention.key + "/offers").set
+    firebase.database().ref("intentions/" + intention.key + "/offers").set(intention.offers,done);
+  }
   saveOffertoDatabase(offer : Offer){
     var value = {
       price : offer.price,

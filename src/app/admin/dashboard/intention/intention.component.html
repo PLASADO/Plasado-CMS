@@ -3,7 +3,7 @@
     <div class="col-md-6 col-xl-3">
         <card [bgColor]="'danger'" class="info-card">
           <div class="title text-uppercase">Intentions</div>
-          <div class="count">{{IntentionCount}}</div>
+          <div class="count">{{intentionlist.length}}</div>
           <!-- <badge [customColor]="'rgba(255,255,255,0.3)'" [borderRadius]="false">+17%</badge> <small>from previous period</small> -->
           <md-icon>shopping_basket</md-icon>
         </card>
@@ -11,68 +11,209 @@
   </div>
   <div class="row">
       <div class="col-md-12">
-        <ngx-datatable
-          #datatable
-          class="material"
-          [rows]="intentionlist"
-          [headerHeight]="50"
-          [columnMode]="'standard'"
-          [rowHeight]="'auto'"
-          [limit]="10"
-          [loadingIndicator]="loadingIndicator"
-          [footerHeight]="50">
-      
-        <ngx-datatable-column name="No" >
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-            <span>{{value}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-      
-        <ngx-datatable-column name="User">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
-            <span>{{value}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Name">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
-            <span>{{value}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-      
-        <ngx-datatable-column name="Date">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
-            <span>{{value}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-      
-        <ngx-datatable-column name="Location">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
-            <span>{{value}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-      
-        <ngx-datatable-column name="Category">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
-            <span>{{value}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="MinBudget">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
-            <span>{{value}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="MaxBudget">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
-            <span>{{value}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-            <button md-icon-button (click)="onEdit(row.no - 1)"><md-icon>edit</md-icon></button>
-            <button md-icon-button (click)="onRemove(row.no - 1)"><md-icon>delete</md-icon></button>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
+        <card [title]="'Intention List'">
+          <md-tab-group>
+            <md-tab label="All">
+              <ngx-datatable
+                #datatable
+                class="material"
+                [rows]="intentionlist"
+                [headerHeight]="50"
+                [columnMode]="'standard'"
+                [rowHeight]="'auto'"
+                [limit]="10"
+                [loadingIndicator]="loadingIndicator"
+                [footerHeight]="50">
+            
+                <ngx-datatable-column name="No" >
+                  <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                    <span>{{value}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+              
+                <ngx-datatable-column name="User">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                    <span>{{value}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Name">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                    <span>{{value}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+              
+                <ngx-datatable-column name="Date">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                    <span>{{value}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+              
+                <ngx-datatable-column name="Location">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                    <span>{{value}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+              
+                <ngx-datatable-column name="Category">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                    <span>{{value}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="MinBudget">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                    <span>{{value}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="MaxBudget">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                    <span>{{value}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                    <!-- <button *ngIf="row.offers" type="button" md-icon-button (click)="propose(row.no - 1)"><md-icon>check</md-icon></button> -->
+                    <div *ngIf="row.offers.length > 0; then proposed else notproposed"></div>
+                    
+                    <ng-template #proposed >
+                        <button type="button" md-icon-button><md-icon>check</md-icon></button>
+                    </ng-template>
+                      
+                    <ng-template #notproposed>
+                        <button type="button" md-icon-button (click)='propose(row.no - 1 , "all")'><md-icon>add</md-icon></button>
+                    </ng-template>
+                  </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+          </md-tab>
+          <md-tab label="Proposed">
+            <ngx-datatable
+              #datatable
+              class="material"
+              [rows]="proposed_intentionlist"
+              [headerHeight]="50"
+              [columnMode]="'standard'"
+              [rowHeight]="'auto'"
+              [limit]="10"
+              [loadingIndicator]="loadingIndicator"
+              [footerHeight]="50">
+          
+              <ngx-datatable-column name="No" >
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+            
+              <ngx-datatable-column name="User">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Name">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+            
+              <ngx-datatable-column name="Date">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+            
+              <ngx-datatable-column name="Location">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+            
+              <ngx-datatable-column name="Category">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="MinBudget">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="MaxBudget">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                    <button type="button" md-icon-button><md-icon>check</md-icon></button>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </md-tab>
+          <md-tab label="Not proposed">
+            <ngx-datatable
+              #datatable
+              class="material"
+              [rows]="notproposed_intentionlist"
+              [headerHeight]="50"
+              [columnMode]="'standard'"
+              [rowHeight]="'auto'"
+              [limit]="10"
+              [loadingIndicator]="loadingIndicator"
+              [footerHeight]="50">
+          
+              <ngx-datatable-column name="No" >
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+            
+              <ngx-datatable-column name="User">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Name">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+            
+              <ngx-datatable-column name="Date">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+            
+              <ngx-datatable-column name="Location">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+            
+              <ngx-datatable-column name="Category">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="MinBudget">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="MaxBudget">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+                  <span>{{value}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="">
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                    <button type="button" md-icon-button (click)='propose(row.no - 1,"notproposed")'><md-icon>add</md-icon></button>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </md-tab>
+        </md-tab-group>
+      </card>
+        
     </div>
   </div>
 </div>

@@ -76,7 +76,7 @@ import { SigninComponent } from './admin/signin/signin.component';
 import { SignupComponent } from './admin/signup/signup.component';
 import { OfferComponent } from './admin/dashboard/offer/offer.component';
 import { IntentionComponent } from './admin/dashboard/intention/intention.component';
-
+import { ChatComponent } from './admin/dashboard/chat/chat.component';
 
 import { AuthGuard } from './admin/services/authguard/authguard';
 
@@ -165,6 +165,7 @@ const signin_up_Routes: Routes = [
 const adminRoutes : Routes = [
    { path : 'offerlist', component : OfferComponent, canActivate : [AuthGuard] },
    { path : 'intentionlist', component : IntentionComponent, canActivate : [AuthGuard] },
+   { path : 'chat', component : ChatComponent, canActivate : [AuthGuard] }
   // { path : 'devicemanage', component : DevicemanageComponent, canActivate : [AuthGuard] },
   // { path : 'devicegroupmanage', component : DevicegroupmanageComponent, canActivate : [AuthGuard]},
   // { path : 'devicegroupedit', component : DevicegroupeditComponent},

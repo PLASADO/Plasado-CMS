@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   moduleId: module.id,
   selector: 'app',
@@ -7,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['../assets/sass/style.scss']
 })
 export class AppComponent {
+  message;
+  constructor() {}
+  ngOnInit() {
 
+  }
 }

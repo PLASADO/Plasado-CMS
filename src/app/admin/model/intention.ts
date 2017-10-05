@@ -7,6 +7,8 @@ export class Intention {
     minBudget : number;
     maxBudget : number;
     user : string;
+    offers : string[] = [];
+    key : string;
     static initialize(value){
         var intention = new Intention();
         intention.name = value.name;
@@ -16,6 +18,8 @@ export class Intention {
         intention.minBudget = value.minBudget;
         intention.maxBudget = value.maxBudget;
         intention.user = value.user;
+        intention.key = value.$key;
+        intention.offers = value.offers == undefined ? [] : value.offers;
         return intention;
     }
 }

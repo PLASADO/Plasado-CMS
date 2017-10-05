@@ -4,7 +4,7 @@ import { NgModule }                         from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, Http }                 from '@angular/http';
 import { BrowserAnimationsModule }          from '@angular/platform-browser/animations';
-
+import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import {
   MdAutocompleteModule,
   MdButtonModule,
@@ -145,13 +145,17 @@ import { OfferdialogComponent } from './admin/dashboard/offer/offerdialog/offerd
 
 import { AuthService } from './admin/services/auth-service/auth.service';
 import { FireService } from './admin/services/fireservice/fire.service';
+import { MessagingService } from './admin/services/messaging/messaging.service';
 import { AuthGuard } from './admin/services/authguard/authguard';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { IntentionComponent } from './admin/dashboard/intention/intention.component';
+import { ProposedialogComponent } from './admin/dashboard/intention/proposedialog/proposedialog.component';
+import { ChatComponent } from './admin/dashboard/chat/chat.component';
 
+import { StylizePipe } from './stylize.pipe';
 export const firebaseConfig = {
   apiKey: "AIzaSyBwdmdX7bfq1xjEsgk-6S2GeYqC2jXyt_Y",
   authDomain: "plasado-eea28.firebaseapp.com",
@@ -160,6 +164,25 @@ export const firebaseConfig = {
   storageBucket: "plasado-eea28.appspot.com",
   messagingSenderId: "666738415613"
 };
+
+import { environment } from '../environments/environment';
+
+const configErrMsg = `You have not configured and imported the Firebase SDK.
+Make sure you go through the codelab setup instructions.`;
+
+const bucketErrMsg = `Your Firebase Storage bucket has not been enabled. Sorry
+about that. This is actually a Firebase bug that occurs rarely. Please go and
+re-generate the Firebase initialization snippet (step 4 of the codelab) and make
+sure the storageBucket attribute is not empty. You may also need to visit the
+Storage tab and paste the name of your bucket which is displayed there.`;
+
+if (!environment.firebase) {
+  if (!environment.firebase.apiKey) {
+    window.alert(configErrMsg);
+  } else if (environment.firebase.storageBucket === '') {
+    window.alert(bucketErrMsg);
+  }
+}
 @NgModule({
   imports: [
     BrowserModule,
@@ -207,7 +230,8 @@ export const firebaseConfig = {
     SqueezeBoxModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    Ng4GeoautocompleteModule.forRoot()
   ],
   declarations : [
     AppComponent,
@@ -299,13 +323,17 @@ export const firebaseConfig = {
     SignupComponent,
     OfferComponent,
     OfferdialogComponent,
-    IntentionComponent
+    IntentionComponent,
+    ProposedialogComponent,
+    ChatComponent,
+    StylizePipe
   ],
-  entryComponents: [ DialogResultComponent, CalendarDialogComponent, OfferdialogComponent ],
+  entryComponents: [ DialogResultComponent, CalendarDialogComponent, OfferdialogComponent,ProposedialogComponent ],
   bootstrap: [ AppComponent ],
   providers: [
     AuthService,
     FireService,
+    MessagingService,
     AuthGuard
   ]
 })

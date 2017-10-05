@@ -1,0 +1,25 @@
+<form [formGroup]="form">
+    <h2 md-dialog-title>{{dialogTitle}}</h2>
+    <div md-dialog-content >
+      <div class="row">
+        <div class="col-md-12">
+          <md-select placeholder="Select Offer" [style.width]="'100%'" [formControl]="form.controls['offer']">
+            <md-option *ngFor="let offer of offerList" [value]="offer">
+              {{ offer.title}}
+            </md-option>
+          </md-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <md-input-container class="mb-0">
+            <textarea mdInput placeholder="Message" rows="5" [formControl]="form.controls['message']"></textarea>
+          </md-input-container>
+        </div>
+      </div>
+    </div>
+    <div md-dialog-actions>
+        <button md-button (click)="dialogRef.close('cancel')" color="accent">Cancel</button>
+        <button md-button (click)="dialogRef.close('submit')" color="accent" [disabled]="!form.valid">Submit</button>
+    </div>
+  </form>

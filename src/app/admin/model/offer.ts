@@ -8,6 +8,7 @@ export class Offer {
     price : number;
     title : string;
     userEmail : string;
+    key : string;
     static initialize(value){
         var offer = new Offer();
         offer.category = value.category;
@@ -18,6 +19,7 @@ export class Offer {
         offer.price = value.price;
         offer.title = value.title;
         offer.userEmail = value.userEmail;
+        offer.key = value.$key;
         return offer;
     }
 }

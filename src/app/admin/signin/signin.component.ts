@@ -35,14 +35,14 @@ export class SigninComponent implements OnInit {
 
     this.authService.login(user.email, user.password)
     .then( value => {
-      alert("Login Success");
+      //alert("Login Success");
       this.fireService.getUserDatabase(value).subscribe(
       value => {
         this.authService.currentUser = User.init(value);
         this.router.navigate(['/admin/offerlist']);
       },
       error => {
-        alert(error.message);
+        //alert(error.message);
       });
 
     })

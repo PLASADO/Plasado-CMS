@@ -17,11 +17,11 @@ export class OfferComponent implements OnInit {
 
   @ViewChild('datatable') table;
   offerlist : Offer[] = [];
+  loadingIndicator = true;
   constructor(
     private fireservice : FireService, 
     private authservice : AuthService,
     public dialog: MdDialog,private zone:NgZone) { 
-
   }
   
   ngOnInit() {
